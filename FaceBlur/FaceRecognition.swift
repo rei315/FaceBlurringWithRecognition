@@ -20,9 +20,30 @@ public final class FaceRecognition {
         }
         let request = VNDetectFaceRectanglesRequest()
         request.preferBackgroundProcessing = true
+        let orientation: CGImagePropertyOrientation
+        switch image.imageOrientation {
+        case .up:
+            orientation = .up
+        case .down:
+            orientation = .down
+        case .left:
+            orientation = .left
+        case .right:
+            orientation = .right
+        case .upMirrored:
+            orientation = .upMirrored
+        case .downMirrored:
+            orientation = .downMirrored
+        case .leftMirrored:
+            orientation = .leftMirrored
+        case .rightMirrored:
+            orientation = .rightMirrored
+        @unknown default:
+            orientation = .up
+        }
         let handler = VNImageRequestHandler(
             cgImage: cgImage,
-            orientation: .up
+            orientation: orientation
         )
         return try await withTaskCancellationHandler {
             try Task.checkCancellation()

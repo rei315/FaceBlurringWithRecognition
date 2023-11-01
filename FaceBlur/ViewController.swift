@@ -46,21 +46,20 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         if let selectedImage = info[.originalImage] as? UIImage {
             Task {
                 do {
-//                    let observations = try await FaceRecognition.recognize(in: selectedImage)
-//                    let result = try ImageFilterProcessor.performFaceBlurring(
-//                        originalImage: selectedImage,
-//                        observations: observations
-//                    )
+                    let observations = try await FaceRecognition.recognize(in: selectedImage)
+                    let result = try ImageFilterProcessor.performFaceBlurring(
+                        originalImage: selectedImage,
+                        observations: observations
+                    )
                     await MainActor.run {
-                        let sticker = StickerView(
-                            frame: .init(x: 100, y: 100, width: 100, height: 100),
-                            contentImage: UIImage()
-                        )
-                        sticker.delegate = self
-                        view.addSubview(sticker)
+//                        let sticker = StickerView(
+//                            frame: .init(x: 100, y: 100, width: 100, height: 100),
+//                            contentImage: UIImage()
+//                        )
+//                        sticker.delegate = self
+//                        view.addSubview(sticker)
                         
-                        imageView.image = selectedImage
-                        imageView.isUserInteractionEnabled = false
+                        imageView.image = result
                     }
                 } catch {
                     await MainActor.run {

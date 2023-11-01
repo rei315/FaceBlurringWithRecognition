@@ -166,7 +166,7 @@ public final class ImageFilterProcessor {
         guard let resultCGImage = CIContext().createCGImage(outputImage, from: outputImage.extent) else {
             throw ImageFilterProcessorErrorType.invalidCGImageResult
         }
-        let resultImage = UIImage(cgImage: resultCGImage, scale: 1, orientation: .up)
+        let resultImage = UIImage(cgImage: resultCGImage, scale: 1, orientation: originalImage.imageOrientation)
         return resultImage
     }
     
