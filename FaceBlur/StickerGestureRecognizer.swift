@@ -19,7 +19,6 @@ class StickerGestureRecognizer: UIGestureRecognizer {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-        // Only support single hand.
         if event.touches(for: self)!.count > 1 {
             self.state = .failed
         }

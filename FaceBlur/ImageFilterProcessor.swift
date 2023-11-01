@@ -43,7 +43,6 @@ public final class ImageFilterProcessor {
         guard let ciImage = CIImage(image: originalImage) else {
             throw ImageFilterProcessorErrorType.invalidImage
         }
-        var maskImage: CIImage?
         let centerX = rect.midX
         let centerY = rect.midY
         let radius = min(rect.size.width, rect.size.height) / 1.8
@@ -68,18 +67,7 @@ public final class ImageFilterProcessor {
             CIVector(x: centerX, y: centerY),
             forKey: kCIInputCenterKey
         )
-        let circleImage = radialGradient?.outputImage?.cropped(to: ciImage.extent)
-        if (maskImage == nil) {
-            maskImage = circleImage
-        } else {
-            let filter = CIFilter(name: CIFilterType.sourceOverCompositing.value)
-            filter?.setValue(circleImage, forKey: kCIInputImageKey)
-            filter?.setValue(maskImage, forKey: kCIInputBackgroundImageKey)
-            maskImage = filter?.outputImage
-        }
-        guard let maskImage else {
-            throw ImageFilterProcessorErrorType.invalidMasking
-        }
+        let maskImage = radialGradient?.outputImage?.cropped(to: ciImage.extent)
         let pixelateFilter = CIFilter(name: CIFilterType.pixellate.value)
         pixelateFilter?.setValue(
             ciImage,
