@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71275FC72AF20AC40097E39F /* StickerGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71275FC62AF20AC40097E39F /* StickerGestureRecognizer.swift */; };
+		71275FC92AF20B160097E39F /* StickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71275FC82AF20B160097E39F /* StickerView.swift */; };
 		71DF75622AE7C13300D146E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DF75612AE7C13300D146E7 /* AppDelegate.swift */; };
 		71DF75642AE7C13300D146E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DF75632AE7C13300D146E7 /* SceneDelegate.swift */; };
 		71DF75662AE7C13300D146E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DF75652AE7C13300D146E7 /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		71275FC62AF20AC40097E39F /* StickerGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerGestureRecognizer.swift; sourceTree = "<group>"; };
+		71275FC82AF20B160097E39F /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
 		71DF755E2AE7C13300D146E7 /* FaceBlur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceBlur.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71DF75612AE7C13300D146E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71DF75632AE7C13300D146E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +70,8 @@
 				71DF756F2AE7C13600D146E7 /* Info.plist */,
 				71DF75772AE8079D00D146E7 /* FaceRecognition.swift */,
 				71DF75792AE80B4B00D146E7 /* ImageFilterProcessor.swift */,
+				71275FC62AF20AC40097E39F /* StickerGestureRecognizer.swift */,
+				71275FC82AF20B160097E39F /* StickerView.swift */,
 			);
 			path = FaceBlur;
 			sourceTree = "<group>";
@@ -144,7 +150,9 @@
 				71DF75782AE8079D00D146E7 /* FaceRecognition.swift in Sources */,
 				71DF75622AE7C13300D146E7 /* AppDelegate.swift in Sources */,
 				71DF757A2AE80B4B00D146E7 /* ImageFilterProcessor.swift in Sources */,
+				71275FC92AF20B160097E39F /* StickerView.swift in Sources */,
 				71DF75642AE7C13300D146E7 /* SceneDelegate.swift in Sources */,
+				71275FC72AF20AC40097E39F /* StickerGestureRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

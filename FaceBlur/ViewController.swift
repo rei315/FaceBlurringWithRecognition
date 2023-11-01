@@ -46,30 +46,21 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         if let selectedImage = info[.originalImage] as? UIImage {
             Task {
                 do {
-                    let observations = try await FaceRecognition.recognize(in: selectedImage)
-                    let result = try ImageFilterProcessor.performFaceBlurring(
-                        originalImage: selectedImage,
-                        observations: observations
-                    )
+//                    let observations = try await FaceRecognition.recognize(in: selectedImage)
+//                    let result = try ImageFilterProcessor.performFaceBlurring(
+//                        originalImage: selectedImage,
+//                        observations: observations
+//                    )
                     await MainActor.run {
-                        let test = UIView(frame: .init(x: 170, y: 400, width: 50, height: 50))
-                        test.layer.borderColor = UIColor.red.cgColor
-                        test.layer.borderWidth = 1
-                        view.addSubview(test)
-
-                        guard let targetRect = ImageFilterProcessor.getTargetRect(
-                            image: selectedImage,
-                            imageView: imageView,
-                            targetView: test
-                        ) else {
-                            return
-                        }
-
-                        let testResult = try? ImageFilterProcessor.performTest(
-                            originalImage: selectedImage,
-                            rect: targetRect
+                        let sticker = StickerView(
+                            frame: .init(x: 100, y: 100, width: 100, height: 100),
+                            contentImage: UIImage()
                         )
-                        imageView.image = testResult
+                        sticker.delegate = self
+                        view.addSubview(sticker)
+                        
+                        imageView.image = selectedImage
+                        imageView.isUserInteractionEnabled = false
                     }
                 } catch {
                     await MainActor.run {
@@ -82,17 +73,26 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     }
 }
 
+extension ViewController: StickerViewDelegate {
+    @MainActor
+    func didTapApply(sticker: StickerView) {
+        guard let selectedImage = imageView.image,
+              let targetRect = ImageFilterProcessor.getTargetRect(
+                  image: selectedImage,
+                  imageView: imageView,
+                  targetView: sticker.getContentView()
+              ) else {
+            return
+        }
 
-extension UIImage {
-    func aspectFillSize(imageView: UIImageView) -> CGSize {
-        let viewBounds = imageView.bounds
-        let imageOriginalSize = self.size
-        let widthRatio = viewBounds.width / imageOriginalSize.width
-        let heightRatio = viewBounds.height / imageOriginalSize.height
-        let ratio = max(heightRatio, widthRatio)
-        let resizedWidth = imageOriginalSize.width * ratio
-        let resizedHeight = imageOriginalSize.height * ratio
-        let result = CGSize(width: resizedWidth, height: resizedHeight)
-        return result
+        let testResult = try? ImageFilterProcessor.performTest(
+            originalImage: selectedImage,
+            rect: targetRect
+        )
+        imageView.image = testResult
+    }
+    
+    func didTapRemove(sticker: StickerView) {
+        
     }
 }
